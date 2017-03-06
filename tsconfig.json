@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "allowJs": true,
+    "target": "es6",
+    "experimentalDecorators": true,
+    "moduleResolution":"node",
+    "emitDecoratorMetadata": true,
+    "noEmitHelpers": true,
+    "importHelpers":true,
+    "sourceMap": true
+  },
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true,
+    "useCache": true
+  }
+}

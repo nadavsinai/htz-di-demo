@@ -1,0 +1,27 @@
+# Ignore patternlab files,  except sources
+/pl/*
+!/pl/source
+!/pl/config
+
+# Ignore external packages
+node_modules
+jspm_packages
+coverage
+
+# Ignore generated files
+/.tmp
+/css
+/sgSrc/assets
+/styleguide
+/dist
+
+# Ignore ternjs port
+.tern-port
+
+# Ignore IDE metadata
+.idea/*
+
+# Ignore MacOS store
+.DS_Store
+.nyc_output
+.awcache

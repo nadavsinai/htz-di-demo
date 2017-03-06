@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "module": "es6",
+    "allowJs":false,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "dist/esm",
+    "target": "es5"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude":[
+    "node_modules",
+    "src/**/*.d.ts",
+    "src/**/*.spec.ts"
+  ]
+}

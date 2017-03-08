@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import indexInjector from 'inject-loader!./index';
+import {expect} from 'chai';
+const indexInjector = require('inject-loader!./index');
 
 const testMock = {
   count: 100,
@@ -14,7 +14,7 @@ const testMock = {
 describe('test rewire', () => {
   let index;
   beforeEach(() => {
-    index = indexInjector( { './lib/lib': testMock } );
+    index = indexInjector({'./lib/lib': testMock});
   });
   it('we are changing the lib', () => {
     index.doWhile();

@@ -7,8 +7,8 @@ module.exports = {
     ]
   },
   resolve: { // see more info here https://github.com/webpack/webpack/issues/1979
-      mainFields: ['module', 'jsnext:browser', 'jsnext:main', 'browser', 'main'],
-      extensions: [".ts", '.js']
+    mainFields: ['module', 'jsnext:browser', 'jsnext:main', 'browser', 'main'],
+    extensions: [".ts", '.js']
   },
   node: {
     global: true,
@@ -20,11 +20,12 @@ module.exports = {
   },
   module: {
     rules: [
-    
+
       {
-        test:/\.ts$/,
-        loader:'awesome-typescript-loader'
-      },   
+        test: /\.ts$/,
+        loader: 'awesome-typescript-loader',
+        options: { module: process.env.NODE_ENV === 'test' ? 'commonjs' : 'es2015' }
+      },
       {
         enforce: "pre",
         test: /\.js$/,
@@ -34,7 +35,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
-      },  
+      },
       {
         test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2|mp4|webm)$/,
         loader: 'file'  // can replace with  loader: 'url?limit=10000' to make webpack inline assets into dataUrl up to the size limie

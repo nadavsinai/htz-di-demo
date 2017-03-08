@@ -1,7 +1,7 @@
 const path = require('path');
 const webpackMerge = require('webpack-merge');
 const testConfig = require('./config/webpack/test-web.config');
-const webpackConfig = webpackMerge(testConfig, {devtool: 'inline-source-map', target: 'web'});
+const webpackConfig = webpackMerge(testConfig, { devtool: 'inline-source-map', target: 'web' });
 // Our testing bundle is made up of our unit tests, which
 // should individually load up pieces of our application.
 
@@ -17,6 +17,7 @@ module.exports = function (config) {
     // // list of files / patterns to load in the browser
     files: [
       // './node_modules/promise-polyfill/promise.js', // important for PhantomJS
+      {pattern:'./node_modules/reflect-metadata/Reflect.js',watched:false,served:true},
       'config/tests/karmaTestsRunner.js', // loads all tests via webpack context require
     ],
     // list of files to exclude
@@ -71,7 +72,7 @@ module.exports = function (config) {
           dir: 'coverage',
           subdir: normalizationBrowserName
         },
-        {type: 'text-summary'}
+        { type: 'text-summary' }
       ]
     },
     browsers: ['PhantomJS'], //'Chrome','Firefox' possible

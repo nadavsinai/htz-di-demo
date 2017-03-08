@@ -12,25 +12,22 @@
   },
   "license": "MIT",
   "scripts": {
-
     "update": "ncu",
-    
+    "start": "webpack-dev-server",
     "build": "npm run build:umd && npm run build:esm",
     "build:esm": "tsc -p tsconfig.esm-build.json",
-    
     "build:umd": "cross-env NODE_ENV=production webpack -p --progress --display-error-details --color",
     "gh-pages": "config/gh-pages.sh",
     "init": "git init && npm i",
     "jsdoc": "config/jsdoc.sh",
     "lint": "eslint --global \"$(node config/echo-eslint-test-globals.js)\" --env mocha ./src/**/*.js",
-    "postinstall": "npm rebuild phantomjs-prebuilt" ,
+    "postinstall": "npm rebuild phantomjs-prebuilt",
     "prepublish": "npm run build",
     "serve": "browser-sync start -s dist ",
     "tdd": "npm test -- --watch",
     "tdd:browser": "npm run test:browser -- --auto-watch --no-single-run --browsers Chrome",
     "test:browser": "karma start",
-    "test": "cross-env NODE_ENV=test mocha-webpack",
-    "tdd": "npm test -- --watch",
+    "test": "cross-env NODE_ENV=test node $NODE_DEBUG_OPTION ./node_modules/.bin/mocha-webpack ",
     "coverage": "nyc npm t",
     "coverage:report": "nyc report --reporter=html"
   },
@@ -39,7 +36,12 @@
   "module": "dist/esm/index.js",
   "typings": "dist/esm/index.d.ts",
   "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/mocha": "^2.2.39",
+    "@types/sinon": "^1.16.34",
+    "@types/webpack": "^2.2.7",
     "autoprefixer": "^6.7.2",
+    "awesome-typescript-loader": "3.0.3",
     "babel-cli": "^6.22.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
@@ -59,13 +61,15 @@
     "chai-as-promised": "^6.0.0",
     "clean-webpack-plugin": "^0.1.15",
     "copy-webpack-plugin": "^4.0.1",
+    "core-js": "^2.4.1",
     "cross-env": "^3.1.4",
     "css-loader": "^0.26.1",
     "dirty-chai": "^1.2.2",
-    
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.0",
     "html-webpack-plugin": "^2.28.0",
+    "inject-loader": "3.0.0-beta4",
+    "injection-js": "^2.0.0-rc.2",
     "isparta": "^4.0.0",
     "isparta-loader": "^2.0.0",
     "istanbul": "^0.4.5",
@@ -107,25 +111,18 @@
     "source-map-loader": "^0.1.6",
     "source-map-support": "^0.4.11",
     "style-loader": "^0.13.1",
-    
-    "@types/chai": "^3.4.34",
-    "@types/mocha": "^2.2.39",
-    "@types/sinon": "^1.16.34",
-    "@types/webpack": "^2.2.7",
-    "typescript": "^2.2.0",
-    "awesome-typescript-loader": "3.0.3",
     "tslib": "1.5.0",
-    
-    
+    "typemoq": "^1.2.1",
+    "typescript": "^2.2.0",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
-    "inject-loader": "3.0.0-beta4",
     "webpack-dev-server": "^2.3.0",
     "webpack-merge": "^2.6.1",
     "webpack-node-externals": "^1.5.4"
   },
   "dependencies": {
-    "babel-runtime": "^6.22.0"
+    "babel-runtime": "^6.22.0",
+    "reflect-metadata": "^0.1.10"
   },
   "nyc": {
     "include": [
@@ -137,13 +134,12 @@
       ".awcache",
       "src/**/*.spec.{ts,js}"
     ],
-  "extension": [
-    ".ts",".js"
+    "extension": [
+      ".ts",
+      ".js"
     ],
     "require": [
-    
       "ts-node/register"
-    
     ],
     "sourceMap": false,
     "instrument": false

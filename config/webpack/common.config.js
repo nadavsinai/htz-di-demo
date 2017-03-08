@@ -24,12 +24,13 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: 'awesome-typescript-loader',
-        options: { module: process.env.NODE_ENV === 'test' ? 'commonjs' : 'es2015' }
+        options: { module: process.env.NODE_ENV === 'test' ? "commonjs" : "es2015" }
       },
       {
         enforce: "pre",
         test: /\.js$/,
-        loader: "source-map-loader"
+        loader: "source-map-loader",
+        exclude:[/injection-js/]
       },
       {
         test: /\.js$/,

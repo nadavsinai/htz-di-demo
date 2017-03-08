@@ -5,7 +5,8 @@ require("babel-register")({
   ignore: /node_modules\/(?!htz.*).*/
 });
 require('jsdom-global')();
-
+require('core-js/es6/reflect');
+require('reflect-metadata');
 
 const chai = require('chai'),
   sinonChai = require('sinon-chai'),

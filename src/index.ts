@@ -1,24 +1,7 @@
-/**
- *  DI-DEMO
- *
- * 
- * @module DI-demo
- * @license MIT
- */
-
-import * as counter from './lib/lib';
-
-export default function somethingElse() {
-  if (counter.count > 100) {
-    return 'more';
-  } else {
-    return 'less';
-  }
-}
-
-export function doWhile() {
-  do {
-    counter.increment();
-  } while (counter.count < 100);
-  return counter.count;
+import * as diApp from './diApp';
+import {WindowToken} from './shop/general.types';
+let injector = diApp.runShop();
+let theWindow: Window = injector.get(WindowToken);
+theWindow['clearShop'] = function () {
+  theWindow.localStorage.clear();
 }

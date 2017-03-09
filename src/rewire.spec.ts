@@ -1,11 +1,10 @@
 import {expect} from 'chai';
-const indexInjector = require('inject-loader!./index');
+import * as sinon from "sinon";
+const indexInjector = require('inject-loader!./rewire');
 
 const testMock = {
   count: 100,
-  increment: () => {
-    console.log('mockIncrement');
-  },
+  increment: sinon.spy(),
   decrement: () => {
     console.log('mockDecrement');
   }
@@ -17,7 +16,8 @@ describe('test rewire', () => {
     index = indexInjector({'./lib/lib': testMock});
   });
   it('we are changing the lib', () => {
-    index.doWhile();
-    expect(true).to.be.true;
+    let returnVal = index.doWhile();
+    expect(returnVal).to.eq(100);
+    expect(testMock.increment.callCount).to.eq(1);
   });
 });

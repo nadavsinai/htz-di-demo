@@ -7,6 +7,7 @@ require("babel-register")({
 require('jsdom-global')();
 require('core-js/es6/reflect');
 require('reflect-metadata');
+window.Reflect = global.Reflect; // fix reflect made by jsdom to be same as the one shimmed by reflect-metadata shim
 
 const chai = require('chai'),
   sinonChai = require('sinon-chai'),
